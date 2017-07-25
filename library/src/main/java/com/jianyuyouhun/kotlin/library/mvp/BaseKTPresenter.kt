@@ -2,6 +2,7 @@ package com.jianyuyouhun.kotlin.library.mvp
 
 import android.content.Context
 import com.jianyuyouhun.kotlin.library.app.KTApp
+import com.jianyuyouhun.kotlin.library.utils.Logger
 import java.lang.ref.WeakReference
 
 /**
@@ -20,6 +21,7 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
     fun onCreate(context: Context) {
         this.context = context
         isDestroy = false
+        Logger.d(TAG, "onCreate")
     }
 
     fun onBindModelView(model: MajorManager, view: MajorView) {
