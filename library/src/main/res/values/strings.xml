@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Library</string>
+    <string name="setting_class_not_found">设置页面打开失败</string>
 </resources>
