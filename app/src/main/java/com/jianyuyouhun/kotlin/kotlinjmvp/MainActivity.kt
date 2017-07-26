@@ -17,4 +17,6 @@ class MainActivity : BaseActivity() {
         textView = findViewById(R.id.textView) as TextView
         textView!!.text="hello Kotlin"
     }
+
+
 }

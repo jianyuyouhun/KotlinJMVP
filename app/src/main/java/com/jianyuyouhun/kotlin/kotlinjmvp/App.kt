@@ -12,7 +12,12 @@ class App: KTApp() {
     override fun onCreate() {
         super.onCreate()
     }
+
     override fun initModels(models: List<BaseKTModel>) {
 
+    }
+
+    override fun setDebugMode(): Boolean {
+        return super.setDebugMode()
     }
 }

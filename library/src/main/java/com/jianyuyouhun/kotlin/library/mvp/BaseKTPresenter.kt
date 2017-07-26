@@ -10,15 +10,16 @@ import java.lang.ref.WeakReference
  * Created by wangyu on 2017/7/25.
  */
 abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTView> {
+
     var mModel: MajorManager? = null
     private var mView: MajorView? = null
     private var mViewRef: WeakReference<MajorView>? = null
-    var context: Context? = null
+    lateinit var context: Context
     var isDestroy = false
 
     protected val TAG: String = BaseKTPresenter::class.java.simpleName
 
-    fun onCreate(context: Context) {
+    open fun onCreate(context: Context) {
         this.context = context
         isDestroy = false
         Logger.d(TAG, "onCreate")
@@ -42,17 +43,18 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
         return mModel != null && mViewRef!!.get() != null
     }
 
-    fun onDestroy() {
+    open fun onDestroy() {
         if (mViewRef != null) {
             mViewRef!!.clear()
             mViewRef = null
         }
         isDestroy = true
     }
+
     /**
      * 获取辅助model
      */
     fun <MinorModel : BaseKTModel> getModel(model: Class<MinorModel>): MinorModel {
-        return KTApp.mInstance!!.getKTModel(model)
+        return KTApp.mInstance.getKTModel(model)
     }
 }

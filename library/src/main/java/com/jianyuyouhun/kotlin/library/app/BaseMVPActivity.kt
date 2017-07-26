@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType
  * MVPActivity基类
  * Created by wangyu on 2017/7/25.
  */
-abstract class BaseMVPActivity<MajorPresenter : BaseKTPresenter<*, *>, MajorModel : BaseKTModel>: BaseActivity() {
+abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel: BaseKTModel>: BaseActivity() {
 
     var mPresenter: MajorPresenter? = null
     var mModel: MajorModel? = null

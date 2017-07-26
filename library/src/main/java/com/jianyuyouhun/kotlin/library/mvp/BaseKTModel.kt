@@ -6,15 +6,15 @@ import com.jianyuyouhun.kotlin.library.app.KTApp
  * model基类
  * Created by wangyu on 2017/7/25.
  */
-open class BaseKTModel {
+abstract class BaseKTModel {
 
-    fun onModelCreate(app: KTApp) {}
+    abstract fun onModelCreate(app: KTApp)
 
-    fun onModelDestroy() {}
+    open fun onModelDestroy() {}
 
-    fun onAllModelCreate() {}
+    open fun onAllModelCreate() {}
 
     fun <MinorModel : BaseKTModel> getModel(model: Class<MinorModel>): MinorModel {
-        return KTApp.mInstance!!.getKTModel(model)
+        return KTApp.mInstance.getKTModel(model)
     }
 }

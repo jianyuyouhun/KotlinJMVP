@@ -7,17 +7,26 @@ import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
 
 /**
+ * 应用调试模式配置
+ *
+ * Created by wangyu on 2017/7/25.
+ */
+object BuildConfig {
+    var IS_DEBUG : Boolean = true
+}
+
+/**
  * application基类
  * Created by wangyu on 2017/7/25.
  */
 abstract class KTApp : Application() {
 
     companion object {
-        val TAG: String = "KTApp"
 
-        var mInstance: KTApp? = null
+        val TAG: String = "KTApp"
         var isDebug: Boolean = false
 
+        lateinit var mInstance: KTApp private set
     }
 
     var mIsMainProcess = false
@@ -26,7 +35,7 @@ abstract class KTApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mInstance = if (mInstance == null) this else return
+        mInstance = this
         BuildConfig.IS_DEBUG = setDebugMode()
         isDebug = BuildConfig.IS_DEBUG
         initExceptionCatch()
@@ -36,25 +45,20 @@ abstract class KTApp : Application() {
         initKTApp()
     }
 
-
     /**
      * 初始化第三方依赖
      */
-    fun initDependencies() {
-
-    }
+    open fun initDependencies() {}
 
     /**
      * 设置调试模式参数
      */
-    fun setDebugMode(): Boolean {
-        return true
-    }
+    open fun setDebugMode(): Boolean = true
 
     /**
      * 初始化异常捕获逻辑
      */
-    fun initExceptionCatch() {
+    open fun initExceptionCatch() {
         if (isDebug) {
             val handler: Thread.UncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
             val exceptionCaughtAdapter = ExceptionCaughtAdapter(handler)

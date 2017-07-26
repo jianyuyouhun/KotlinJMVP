@@ -6,7 +6,7 @@ package com.jianyuyouhun.kotlin.library.app.exception
  */
 class ExceptionCaughtAdapter(handler: Thread.UncaughtExceptionHandler) : Thread.UncaughtExceptionHandler{
 
-    var mHandler: Thread.UncaughtExceptionHandler = handler;
+    var mHandler: Thread.UncaughtExceptionHandler = handler
 
     override fun uncaughtException(t: Thread?, e: Throwable?) {
         ExceptionActivity.showException(e!!)

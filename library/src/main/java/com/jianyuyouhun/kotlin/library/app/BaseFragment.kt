@@ -34,7 +34,7 @@ abstract class BaseFragment: Fragment() {
         return view
     }
 
-    fun buildLayoutView(): View? {
+    open fun buildLayoutView(): View? {
         return null
     }
 

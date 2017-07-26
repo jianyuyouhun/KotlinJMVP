@@ -62,7 +62,7 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 不想用layoutId时重写此方法返回view
      */
-    fun buildLayoutView(): View? {
+    open fun buildLayoutView(): View? {
         return null
     }
 
@@ -111,7 +111,7 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
 
-    protected fun initProgressDialog() {
+    protected open fun initProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = ProgressDialog(getContext())
             mProgressDialog!!.setCancelable(false)
@@ -122,7 +122,7 @@ abstract class BaseActivity: AppCompatActivity() {
      * 是否在500毫秒内连续点击
      */
     @Synchronized fun isFastDoubleClick(): Boolean {
-        var time = System.currentTimeMillis()
+        val time = System.currentTimeMillis()
         if (mLastClickTime > time) {
             mLastClickTime = time
             return false

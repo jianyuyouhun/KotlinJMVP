@@ -7,7 +7,7 @@ import android.os.Handler
  * 通用接口回调
  * Created by wangyu on 2017/7/25.
  */
-interface OnResultListener<T> {
+interface OnResultListener<in T> {
     companion object {
         /** 请求成功 */
         val RESULT_SUCCESS = 0
@@ -25,11 +25,11 @@ interface OnResultListener<T> {
     /**
      * 延时回调接口
      */
-    abstract class OnDelayResultListener<T>(delay: Long) : OnResultListener<T> {
+    abstract class OnDelayResultListener<in T>(delay: Long) : OnResultListener<T> {
         val mHandler = Handler()
         var mDelay = delay
 
-        override fun onResult(result: Int, info: T) {
+        final override fun onResult(result: Int, info: T) {
             mHandler.postDelayed(Runnable{
                 onDelayResult(result, info)
             }, mDelay)
