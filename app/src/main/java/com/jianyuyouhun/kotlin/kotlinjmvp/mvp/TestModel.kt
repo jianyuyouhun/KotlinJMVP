@@ -1,7 +1,7 @@
 package com.jianyuyouhun.kotlin.kotlinjmvp.mvp
 
+import android.app.Application
 import android.os.Message
-import com.jianyuyouhun.kotlin.library.app.KTApp
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
@@ -22,7 +22,7 @@ class TestModel: BaseKTModel() {
         }
     }
 
-    override fun onModelCreate(app: KTApp) {
+    override fun onModelCreate(app: Application) {
         handler = LightBroadCast.getInstance()
         handler.addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
