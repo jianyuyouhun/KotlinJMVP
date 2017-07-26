@@ -12,10 +12,15 @@ import java.lang.ref.WeakReference
 abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTView> {
 
     var mModel: MajorManager? = null
+        private set
     private var mView: MajorView? = null
+        private set
     private var mViewRef: WeakReference<MajorView>? = null
+        private set
     lateinit var context: Context
+        private set
     var isDestroy = false
+        private set
 
     protected val TAG: String = BaseKTPresenter::class.java.simpleName
 

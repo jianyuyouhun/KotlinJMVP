@@ -1,5 +1,6 @@
-package com.jianyuyouhun.kotlin.kotlinjmvp
+package com.jianyuyouhun.kotlin.kotlinjmvp.app
 
+import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestModel
 import com.jianyuyouhun.kotlin.library.app.KTApp
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 
@@ -13,8 +14,8 @@ class App: KTApp() {
         super.onCreate()
     }
 
-    override fun initModels(models: List<BaseKTModel>) {
-
+    override fun initModels(models: ArrayList<BaseKTModel>) {
+        models.add(TestModel())
     }
 
     override fun setDebugMode(): Boolean {

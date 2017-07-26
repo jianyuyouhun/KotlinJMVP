@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jianyuyouhun.kotlin.kotlinjmvp.MainActivity">
+    tools:context="com.jianyuyouhun.kotlin.kotlinjmvp.ui.MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -15,5 +15,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/test_mvp_btn"
+        android:text="测试MVP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
