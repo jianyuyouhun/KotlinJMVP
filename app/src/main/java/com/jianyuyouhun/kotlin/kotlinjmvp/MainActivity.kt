@@ -1,12 +1,20 @@
 package com.jianyuyouhun.kotlin.kotlinjmvp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import com.jianyuyouhun.kotlin.library.app.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    var textView: TextView? = null
+
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_main
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        textView = findViewById(R.id.textView) as TextView
+        textView!!.text="hello Kotlin"
     }
 }
