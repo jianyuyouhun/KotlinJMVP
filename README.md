@@ -10,6 +10,8 @@
 
 ## 重点记录 ##
 
+### 修饰符 ###
+
 　　重要修饰符含义需要注意：open， companion object{}， @Synchronized
 
   
@@ -46,8 +48,24 @@
 
 > 而在Kotlin中，如果不加上out，那么也是一样的结果，要么明确声明类型，要么就编译报错
 
+### javaClass 和 class.java ###
 
-#### 其他 ####
+　　当在使用反射机制的时候，总是会去获取这个对象的class类型，以及其field或者method，后两者使用都比较明确，比如我们有一个var cls: Class<*>;要获取cls的field，直接调用cls.fields就行了，这点在kotlin中是很明确的。
+
+　　但是当我们要获取一个对象的类的时候，会发现有两个方法，一个是cls::javaClass，另外一个是cls::class.java。二者有着一些相同的地方，比如.name、.annotations这些调用结果是一样的，但是也有一些区别。
+
+1. javaClass获取到的对象在断点调式中看到的是一个**property javaClass**。也就是说这是一个javaClass属性，其在内存中的名字也不一样，显示为一个对象内部属性，例如：**ViewInjector$Companion$injectView$ojc$1@4636**
+2. class.java获取到的则显示为**class java.lang.Object**，其在内存中的名字则是这样类型的：**Class@564**
+
+　　所以，我们可以得出一些结论，kotlin中javaClass是作为一个具体实例化对象（这个对象是Kotlin中的Any的子类实例化，在Java中则是java.lang.Object的子类实例化，Any和Object在两种语言编译环境下转成字节码后应该是一样的）的**一个属性存在**，而class.java就像Java中调用getClass是一样的。是一个固定类型，不管我一个对象是在Activity中实例化，还是在ViewHolder中实例化，class.java是一样的，但是javaClass则明显不同。
+
+　　更形点的说法，javaClass就像一个一个学生的各种标签，他在A学校中的学号和转学到B学校去的学号是不同的，而class.java则是他的身份证号码，无论走到哪里，哪怕他经历从学校到社会职场（可以理解为从kotlin到java）的转变，这个身份证号码依然是不变的。
+
+　　所以我们需要注意的是，在Kotlin语法中使用Java的特性的时候，这点需要特别注意。
+
+> **superClass和::class.java.superclass也是一样的原理**
+
+### 其他 ###
 
 　　kotlin中很多注解使用都是加上一个@然后作为修饰符在使用
 
