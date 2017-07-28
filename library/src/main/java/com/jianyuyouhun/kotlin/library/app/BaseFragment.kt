@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
 
 /**
  * Fragment基类
@@ -30,6 +31,8 @@ abstract class BaseFragment: Fragment() {
         } else {
             view = inflater!!.inflate(layoutId, container, false)
         }
+
+        ViewInjector.inject(this, view!!)
         onCreateView(view, container, savedInstanceState)
         return view
     }

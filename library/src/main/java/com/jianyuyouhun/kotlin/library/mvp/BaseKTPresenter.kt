@@ -44,9 +44,7 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
         }
     }
 
-    fun isAttach(): Boolean {
-        return mModel != null && mViewRef!!.get() != null
-    }
+    fun isAttach(): Boolean = mModel != null && mViewRef!!.get() != null
 
     open fun onDestroy() {
         if (mViewRef != null) {
@@ -59,7 +57,5 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
     /**
      * 获取辅助model
      */
-    fun <MinorModel : BaseKTModel> getModel(model: Class<MinorModel>): MinorModel {
-        return KTApp.mInstance.getKTModel(model)
-    }
+    fun <MinorModel : BaseKTModel> getModel(model: Class<MinorModel>): MinorModel = KTApp.mInstance.getKTModel(model)
 }

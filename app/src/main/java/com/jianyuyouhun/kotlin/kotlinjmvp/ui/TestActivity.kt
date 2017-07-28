@@ -8,6 +8,7 @@ import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestPresenter
 import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestView
 import com.jianyuyouhun.kotlin.library.app.BaseMVPActivity
 import com.jianyuyouhun.kotlin.library.app.KTApp
+import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
 
 /**
  *
@@ -15,6 +16,7 @@ import com.jianyuyouhun.kotlin.library.app.KTApp
  */
 class TestActivity: BaseMVPActivity<TestPresenter, TestModel>(), TestView {
 
+    @FindViewByID(R.id.textView)
     lateinit var textView: TextView
     override fun onSuccess(data: String) {
         textView.text = data
@@ -35,7 +37,6 @@ class TestActivity: BaseMVPActivity<TestPresenter, TestModel>(), TestView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        textView = findViewById(R.id.textView) as TextView
         mPresenter.start()
     }
 }

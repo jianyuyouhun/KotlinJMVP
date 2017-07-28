@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.jianyuyouhun.kotlin.library.R
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
 
 /**
  * Activity基类
@@ -45,6 +46,7 @@ abstract class BaseActivity: AppCompatActivity() {
                 setContentView(view)
             }
         }
+        ViewInjector.inject(this)
     }
 
     @LayoutRes abstract fun getLayoutResId(): Int

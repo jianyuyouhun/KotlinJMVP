@@ -5,10 +5,13 @@ import android.widget.Button
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.kotlinjmvp.R
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
+import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
 
 class MainActivity : BaseActivity() {
 
+    @FindViewByID(R.id.textView)
     lateinit var textView: TextView
+    @FindViewByID(R.id.test_mvp_btn)
     lateinit var testMvpBtn: Button
 
     override fun getLayoutResId(): Int {
@@ -17,8 +20,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        textView = findViewById(R.id.textView) as TextView
-        testMvpBtn = findViewById(R.id.test_mvp_btn) as Button
         textView.text="hello Kotlin"
         testMvpBtn.setOnClickListener {
             startActivity(TestActivity::class.java)
