@@ -12,7 +12,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseMVPFragment<MajorPresenter : BaseKTPresenter<*, *>, MajorModel : BaseKTModel>: BaseFragment() {
 
-    var mPresenter: MajorPresenter? = null
+    lateinit var mPresenter: MajorPresenter
     var mModel: MajorModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +29,11 @@ abstract class BaseMVPFragment<MajorPresenter : BaseKTPresenter<*, *>, MajorMode
             throw InitPresenterException("请确保" + majorPresenterCls.simpleName + "拥有public的无参构造函数");
         }
         mModel = initModel()
-        bindModelAndView(mPresenter!!)
-        if (!mPresenter!!.isAttach()) {
-            throw InitPresenterException("请为" + mPresenter!!.javaClass.name + "绑定数据")
+        bindModelAndView(mPresenter)
+        if (!mPresenter.isAttach()) {
+            throw InitPresenterException("请为" + mPresenter.javaClass.name + "绑定数据")
         }
-        mPresenter!!.onCreate(getBaseActivity())
+        mPresenter.onCreate(getBaseActivity())
     }
 
     abstract fun bindModelAndView(presenter: MajorPresenter)
@@ -42,6 +42,6 @@ abstract class BaseMVPFragment<MajorPresenter : BaseKTPresenter<*, *>, MajorMode
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter!!.onDestroy()
+        mPresenter.onDestroy()
     }
 }

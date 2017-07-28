@@ -1,6 +1,7 @@
 package com.jianyuyouhun.kotlin.library.app
 
 import android.app.Application
+import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
@@ -48,7 +49,9 @@ abstract class KTApp : Application() {
     /**
      * 初始化第三方依赖
      */
-    open fun initDependencies() {}
+    open fun initDependencies() {
+        LightBroadCast.init()
+    }
 
     /**
      * 设置调试模式参数
@@ -67,7 +70,7 @@ abstract class KTApp : Application() {
     }
 
     private fun initKTApp() {
-        val models: List<BaseKTModel> = ArrayList()
+        val models: ArrayList<BaseKTModel> = ArrayList()
         initModels(models)
         for (model in models) {
             val time = System.currentTimeMillis()
@@ -86,7 +89,7 @@ abstract class KTApp : Application() {
     /**
      * 初始化model
      */
-    abstract fun initModels(models: List<BaseKTModel>)
+    abstract fun initModels(models: ArrayList<BaseKTModel>)
 
     @Suppress("UNCHECKED_CAST")
     fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model {

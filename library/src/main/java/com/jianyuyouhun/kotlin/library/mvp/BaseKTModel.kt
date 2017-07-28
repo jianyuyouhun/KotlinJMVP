@@ -1,5 +1,6 @@
 package com.jianyuyouhun.kotlin.library.mvp
 
+import android.app.Application
 import com.jianyuyouhun.kotlin.library.app.KTApp
 
 /**
@@ -8,7 +9,7 @@ import com.jianyuyouhun.kotlin.library.app.KTApp
  */
 abstract class BaseKTModel {
 
-    abstract fun onModelCreate(app: KTApp)
+    abstract fun onModelCreate(app: Application)
 
     open fun onModelDestroy() {}
 

@@ -95,7 +95,7 @@ class CommonUtils {
          */
         @SuppressLint("HardwareIds")
         fun getIMEI(): String {
-            val tm: TelephonyManager = KTApp.mInstance!!.getSystemService(Service.TELEPHONY_SERVICE) as TelephonyManager
+            val tm: TelephonyManager = KTApp.mInstance.getSystemService(Service.TELEPHONY_SERVICE) as TelephonyManager
             mIMEI = if (TextUtils.isEmpty(tm.deviceId)) "" else tm.deviceId
             return mIMEI
         }
@@ -162,7 +162,7 @@ class CommonUtils {
         private fun initDisplayMetrics() {
             if (mDisplayMetrics == null) {
                 mDisplayMetrics = DisplayMetrics()
-                val wndMgr = KTApp.mInstance!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                val wndMgr = KTApp.mInstance.getSystemService(Context.WINDOW_SERVICE) as WindowManager
                 wndMgr.defaultDisplay.getMetrics(mDisplayMetrics)
             }
         }

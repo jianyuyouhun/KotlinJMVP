@@ -5,5 +5,7 @@ package com.jianyuyouhun.kotlin.library.mvp
  * Created by wangyu on 2017/7/25.
  */
 interface BaseKTView {
-    fun showError(error: String)
+    fun showToast(msg: String)
+    fun showProgressDialog()
+    fun dismissProgressDialog()
 }

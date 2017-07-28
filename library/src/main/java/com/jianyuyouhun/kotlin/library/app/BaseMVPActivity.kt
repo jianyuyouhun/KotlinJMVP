@@ -12,7 +12,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel: BaseKTModel>: BaseActivity() {
 
-    var mPresenter: MajorPresenter? = null
+    lateinit var mPresenter: MajorPresenter
     var mModel: MajorModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +29,11 @@ abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel
             throw InitPresenterException("请确保" + majorPresenterCls.simpleName + "拥有public的无参构造函数");
         }
         mModel = initModel()
-        bindModelAndView(mPresenter!!)
-        if (!mPresenter!!.isAttach()) {
-            throw InitPresenterException("请为" + mPresenter!!.javaClass.name + "绑定数据")
+        bindModelAndView(mPresenter)
+        if (!mPresenter.isAttach()) {
+            throw InitPresenterException("请为" + mPresenter.javaClass.name + "绑定数据")
         }
-        mPresenter!!.onCreate(this)
+        mPresenter.onCreate(this)
     }
 
     abstract fun bindModelAndView(presenter: MajorPresenter)
@@ -42,6 +42,6 @@ abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter!!.onDestroy()
+        mPresenter.onDestroy()
     }
 }
