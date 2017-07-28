@@ -15,7 +15,7 @@ interface OnGlobalMsgReceiveListener {
  * 轻量级广播，使用Handler实现
  * Created by wangyu on 2017/7/26.
  */
-class LightBroadCast {
+class LightBroadCast private constructor() {
 
     companion object {
         private var hasInit = false
@@ -48,8 +48,6 @@ class LightBroadCast {
             }
         }
     }
-
-    private constructor()
 
     fun addOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) {
         receiveListeners.add(listener)
