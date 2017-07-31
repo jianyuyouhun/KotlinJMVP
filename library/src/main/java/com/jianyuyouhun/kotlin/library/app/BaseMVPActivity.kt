@@ -14,6 +14,7 @@ abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel
 
     lateinit var mPresenter: MajorPresenter
     var mModel: MajorModel? = null
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ abstract class BaseMVPActivity<MajorPresenter: BaseKTPresenter<*, *>, MajorModel
         mModel = initModel()
         bindModelAndView(mPresenter)
         if (!mPresenter.isAttach()) {
-            throw InitPresenterException("请为" + mPresenter.javaClass.name + "绑定数据")
+            throw InitPresenterException("请为" + majorPresenterCls.simpleName + "绑定数据")
         }
         mPresenter.onCreate(this)
     }

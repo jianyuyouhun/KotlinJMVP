@@ -28,9 +28,7 @@ abstract class BaseActivity: AppCompatActivity() {
     private var mLastClickTime = System.currentTimeMillis()
     companion object {
         var IS_DEBUG_MODE = BuildConfig.IS_DEBUG
-        fun dipToPx(dip: Float): Int {
-            return CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
-        }
+        fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,34 +50,24 @@ abstract class BaseActivity: AppCompatActivity() {
     @LayoutRes abstract fun getLayoutResId(): Int
 
     @Deprecated("", ReplaceWith("super.setContentView(view)", "android.support.v7.app.AppCompatActivity"))
-    override fun setContentView(view: View?) {
-        super.setContentView(view)
-    }
+    override fun setContentView(view: View?) = super.setContentView(view)
 
     @Deprecated("", ReplaceWith("super.setContentView(layoutResID)", "android.support.v7.app.AppCompatActivity"))
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-    }
+    override fun setContentView(layoutResID: Int) = super.setContentView(layoutResID)
 
     /**
      * 不想用layoutId时重写此方法返回view
      */
-    open fun buildLayoutView(): View? {
-        return null
-    }
+    open fun buildLayoutView(): View? = null
 
-    fun showToast(@StringRes msgId: Int) {
-        showToast(getString(msgId))
-    }
+    fun showToast(@StringRes msgId: Int) = showToast(getString(msgId))
 
     fun showToast(msg: String) {
         if (mIsDestroy) return
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    fun getContext(): Context {
-        return this
-    }
+    fun getContext(): Context = this
 
     override fun finish() {
         super.finish()
@@ -139,20 +127,14 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 是否在前台运行
      */
-    fun isAppOnForeground(): Boolean {
-        return !CommonUtils.isRunAtBackground(this)
-    }
+    fun isAppOnForeground(): Boolean = !CommonUtils.isRunAtBackground(this)
 
     /**
      * 启动activity
      */
-    fun startActivity(cls: Class<out Activity>) {
-        startActivity(Intent(this, cls))
-    }
+    fun startActivity(cls: Class<out Activity>) = startActivity(Intent(this, cls))
 
-    fun getActivity(): BaseActivity {
-        return this
-    }
+    fun getActivity(): BaseActivity = this
 
     /**
      * 启动设置页面
@@ -172,28 +154,20 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 以类名打印e日志
      */
-    fun logE(msg: String) {
-        Logger.e(javaClass.simpleName, msg)
-    }
+    fun logE(msg: String) = Logger.e(javaClass.simpleName, msg)
 
     /**
      * 以类名打印i日志
      */
-    fun logI(msg: String) {
-        Logger.i(javaClass.simpleName, msg)
-    }
+    fun logI(msg: String) = Logger.i(javaClass.simpleName, msg)
 
     /**
      * 以类名打印w日志
      */
-    fun logW(msg: String) {
-        Logger.w(javaClass.simpleName, msg)
-    }
+    fun logW(msg: String) = Logger.w(javaClass.simpleName, msg)
 
     /**
      * 以类名打印d日志
      */
-    fun logD(msg: String) {
-        Logger.d(javaClass.simpleName, msg)
-    }
+    fun logD(msg: String) = Logger.d(javaClass.simpleName, msg)
 }

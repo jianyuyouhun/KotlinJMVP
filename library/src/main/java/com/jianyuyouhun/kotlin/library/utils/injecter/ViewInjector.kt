@@ -12,17 +12,11 @@ import java.lang.reflect.Field
 class ViewInjector {
     companion object {
 
-        fun inject(target: Any, view: View) {
-            injectView(target, ViewFinder.Companion.create(view))
-        }
+        fun inject(target: Any, view: View) = injectView(target, ViewFinder.Companion.create(view))
 
-        fun inject(activity: Activity) {
-            injectView(activity, ViewFinder.Companion.create(activity))
-        }
+        fun inject(activity: Activity) = injectView(activity, ViewFinder.Companion.create(activity))
 
-        fun inject(dialog: Dialog) {
-            injectView(dialog, ViewFinder.Companion.create(dialog))
-        }
+        fun inject(dialog: Dialog) = injectView(dialog, ViewFinder.Companion.create(dialog))
 
         private fun injectView(target: Any?, viewFinder: ViewFinder?) {
             if (target == null || viewFinder == null) {
@@ -61,8 +55,7 @@ class ViewInjector {
                 cls = cls::class.java.superclass
             }
         }
-
     }
 }
 
-class ViewInjectException(val string: String): RuntimeException()
+class ViewInjectException(msg: String): RuntimeException(msg)

@@ -2,7 +2,6 @@ package com.jianyuyouhun.kotlin.library.mvp
 
 import android.os.Handler
 
-
 /**
  * 通用接口回调
  * Created by wangyu on 2017/7/25.
@@ -25,14 +24,13 @@ interface OnResultListener<in T> {
     /**
      * 延时回调接口
      */
-    abstract class OnDelayResultListener<in T>(delay: Long) : OnResultListener<T> {
-        val mHandler = Handler()
-        var mDelay = delay
+    abstract class OnDelayResultListener<in T>(val delay: Long) : OnResultListener<T> {
+        private val mHandler = Handler()
 
         final override fun onResult(result: Int, info: T) {
-            mHandler.postDelayed(Runnable{
+            mHandler.postDelayed({
                 onDelayResult(result, info)
-            }, mDelay)
+            }, delay)
         }
 
         abstract fun onDelayResult(result: Int, info: T)

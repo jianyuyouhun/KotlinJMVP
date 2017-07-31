@@ -31,8 +31,9 @@ abstract class KTApp : Application() {
     }
 
     var mIsMainProcess = false
+        private set
 
-    var modelsMap : MutableMap<String, BaseKTModel> = HashMap()
+    private var modelsMap : MutableMap<String, BaseKTModel> = HashMap()
 
     override fun onCreate() {
         super.onCreate()
@@ -92,8 +93,5 @@ abstract class KTApp : Application() {
     abstract fun initModels(models: ArrayList<BaseKTModel>)
 
     @Suppress("UNCHECKED_CAST")
-    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model {
-        return modelsMap[model.name] as Model
-    }
-
+    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = modelsMap[model.name] as Model
 }
