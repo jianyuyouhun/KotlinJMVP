@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Message
 import android.provider.Settings
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
@@ -13,6 +14,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.jianyuyouhun.kotlin.library.R
+import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
+import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
+import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
 import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
@@ -31,10 +35,19 @@ abstract class BaseActivity: AppCompatActivity() {
         fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
     }
 
+    val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
+        override fun onReceiveGlobalMsg(msg: Message) {
+            if (msg.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
+                finish()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mIsDestroy = false
         mIsFinish = false
+        initTheme()
         val layoutId = getLayoutResId()
         if (layoutId != 0) {
             setContentView(getLayoutResId())
@@ -45,6 +58,16 @@ abstract class BaseActivity: AppCompatActivity() {
             }
         }
         ViewInjector.inject(this)
+        LightBroadCast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
+    }
+
+    open fun initTheme() {
+        val themeId = KTApp.mInstance.getKTModel(ThemeModel::class.java).getCurrentTheme()
+        if (themeId == -1) {
+            return
+        }
+        Logger.e("theme", ""+themeId)
+        setTheme(themeId)
     }
 
     @LayoutRes abstract fun getLayoutResId(): Int
@@ -77,6 +100,7 @@ abstract class BaseActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mIsDestroy = true
+        LightBroadCast.getInstance().removeOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 
     /**

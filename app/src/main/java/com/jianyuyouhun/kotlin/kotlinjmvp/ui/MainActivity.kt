@@ -13,6 +13,8 @@ class MainActivity : BaseActivity() {
     lateinit var textView: TextView
     @FindViewByID(R.id.test_mvp_btn)
     lateinit var testMvpBtn: Button
+    @FindViewByID(R.id.test_theme_set)
+    lateinit var testSetThemeBtn: Button
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_main
@@ -24,7 +26,9 @@ class MainActivity : BaseActivity() {
         testMvpBtn.setOnClickListener {
             startActivity(TestActivity::class.java)
         }
+        testSetThemeBtn.setOnClickListener {
+            startActivity(ThemeStyleActivity::class.java)
+        }
     }
-
 
 }

@@ -6,6 +6,8 @@ import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.mvp.common.CacheModel
+import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 
 /**
  * 应用调试模式配置
@@ -72,6 +74,7 @@ abstract class KTApp : Application() {
 
     private fun initKTApp() {
         val models: ArrayList<BaseKTModel> = ArrayList()
+        initCommonModels(models)
         initModels(models)
         for (model in models) {
             val time = System.currentTimeMillis()
@@ -85,6 +88,11 @@ abstract class KTApp : Application() {
         for (model in models) {
             model.onAllModelCreate()
         }
+    }
+
+    open fun initCommonModels(models: ArrayList<BaseKTModel>) {
+        models.add(CacheModel())
+        models.add(ThemeModel())
     }
 
     /**

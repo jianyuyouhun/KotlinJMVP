@@ -20,5 +20,11 @@
         android:text="测试MVP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/test_mvp_btn"
+        android:id="@+id/test_theme_set"
+        android:text="主题切换测试"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
