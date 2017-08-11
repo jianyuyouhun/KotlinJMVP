@@ -9,6 +9,7 @@ import com.jianyuyouhun.kotlin.kotlinjmvp.adapter.SimpleBaseAdapter
 import com.jianyuyouhun.kotlin.kotlinjmvp.app.App
 import com.jianyuyouhun.kotlin.kotlinjmvp.util.AppUtils
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
+import com.jianyuyouhun.kotlin.library.mvp.common.ThemeInfo
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
 
@@ -53,21 +54,21 @@ class ThemeStyleActivity : BaseActivity() {
 
     private fun judgeThemeSources() {
         if (themeAdapter.count == 0) {
-            themeModel.addTheme(ThemeModel.ThemeInfo("夜间模式", R.style.AppBaseNightTheme, false))
-            themeModel.addTheme(ThemeModel.ThemeInfo("普通模式", R.style.AppBaseTheme, true))
-            themeModel.addTheme(ThemeModel.ThemeInfo("夜间模式-无标题栏", R.style.AppBaseNightThemeNoActionBar, false))
-            themeModel.addTheme(ThemeModel.ThemeInfo("普通模式-无标题栏", R.style.AppBaseThemeNoActionBar, false))
+            themeModel.addTheme(ThemeInfo("夜间模式", R.style.AppBaseNightTheme, false))
+            themeModel.addTheme(ThemeInfo("普通模式", R.style.AppBaseTheme, true))
+            themeModel.addTheme(ThemeInfo("夜间模式-无标题栏", R.style.AppBaseNightThemeNoActionBar, false))
+            themeModel.addTheme(ThemeInfo("普通模式-无标题栏", R.style.AppBaseThemeNoActionBar, false))
         }
         refreshData()
     }
 
-    class ThemeAdapter(context: Context): SimpleBaseAdapter<ThemeModel.ThemeInfo, ThemeAdapter.ViewHolder>(context) {
+    class ThemeAdapter(context: Context): SimpleBaseAdapter<ThemeInfo, ThemeAdapter.ViewHolder>(context) {
 
-        var onItemClick: ((themeInfo: ThemeModel.ThemeInfo) -> Unit)? = null
+        var onItemClick: ((themeInfo: ThemeInfo) -> Unit)? = null
 
         override fun getLayoutId(): Int = R.layout.list_theme_item
 
-        override fun bindView(viewHolder: ViewHolder?, data: ThemeModel.ThemeInfo?, position: Int) {
+        override fun bindView(viewHolder: ViewHolder?, data: ThemeInfo?, position: Int) {
             val holder = viewHolder as ViewHolder
             holder.name.text = data!!.name + if (data.idDefault) "(当前主题)" else ""
             holder.name.setOnClickListener {
@@ -79,7 +80,7 @@ class ThemeStyleActivity : BaseActivity() {
 
         override fun onNewViewHolder(): ViewHolder = ViewHolder()
 
-        fun setOnItemClickListener(onItemClick: (themeInfo: ThemeModel.ThemeInfo) -> Unit) {
+        fun setOnItemClickListener(onItemClick: (themeInfo: ThemeInfo) -> Unit) {
             this.onItemClick = onItemClick
         }
 

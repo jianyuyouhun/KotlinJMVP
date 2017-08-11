@@ -19,12 +19,12 @@ public class AppUtils {
      * @param context
      * @param Delayed 延迟多少毫秒
      */
-    public static void restartAPP(Context context, long Delayed){
+    public static void restartAPP(Context context, long Delayed) {
         Intent intent = context.getPackageManager()
                 .getLaunchIntentForPackage(context.getPackageName());
         PendingIntent restartIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 重启应用
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, restartIntent); // 重启应用
         LightBroadCast.Companion.getInstance().sendEmptyMsgDelayed(ThemeModel.Companion.getMSG_WHAT_ALL_ACTIVITY_CLOSE_SELF()
                 , Delayed);
     }

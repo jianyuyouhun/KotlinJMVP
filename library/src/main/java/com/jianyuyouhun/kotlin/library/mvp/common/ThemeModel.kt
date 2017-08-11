@@ -75,6 +75,17 @@ class ThemeModel: BaseKTModel() {
         message.obj = defaultThemeId
         handler.sendMessage(message)
     }
+}
 
-    data class ThemeInfo(var name: String, var value: Int, var idDefault: Boolean)
+class ThemeInfo {
+    var name:String? = null
+    var value:Int = -1
+    var idDefault: Boolean = false
+
+    constructor(name: String, value: Int, idDefault: Boolean): this() {
+        this.name = name
+        this.value = value
+        this.idDefault = idDefault
+    }
+    constructor()
 }
