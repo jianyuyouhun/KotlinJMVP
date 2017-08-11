@@ -7,7 +7,6 @@
         android:id="@+id/theme_name"
         android:padding="16dp"
         android:textSize="17sp"
-        android:textColor="#ff0000"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

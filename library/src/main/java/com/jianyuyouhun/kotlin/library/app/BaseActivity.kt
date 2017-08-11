@@ -66,7 +66,6 @@ abstract class BaseActivity: AppCompatActivity() {
         if (themeId == -1) {
             return
         }
-        Logger.e("theme", ""+themeId)
         setTheme(themeId)
     }
 

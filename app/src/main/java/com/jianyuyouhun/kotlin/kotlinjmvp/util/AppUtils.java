@@ -24,7 +24,7 @@ public class AppUtils {
                 .getLaunchIntentForPackage(context.getPackageName());
         PendingIntent restartIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 200, restartIntent); // 重启应用
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 重启应用
         LightBroadCast.Companion.getInstance().sendEmptyMsgDelayed(ThemeModel.Companion.getMSG_WHAT_ALL_ACTIVITY_CLOSE_SELF()
                 , Delayed);
     }
