@@ -36,13 +36,7 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
         this.mModel = model
     }
 
-    fun getKTView(): MajorView? {
-        if (isAttach()) {
-            return mViewRef!!.get()
-        } else {
-            return null
-        }
-    }
+    fun getKTView(): MajorView? = if (isAttach()) mViewRef!!.get() else null
 
     fun isAttach(): Boolean = mModel != null && mViewRef!!.get() != null
 

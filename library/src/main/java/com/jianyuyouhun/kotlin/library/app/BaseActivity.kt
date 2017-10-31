@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Message
 import android.provider.Settings
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
@@ -13,6 +14,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.jianyuyouhun.kotlin.library.R
+import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
+import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
+import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
 import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
@@ -28,8 +32,14 @@ abstract class BaseActivity: AppCompatActivity() {
     private var mLastClickTime = System.currentTimeMillis()
     companion object {
         var IS_DEBUG_MODE = BuildConfig.IS_DEBUG
-        fun dipToPx(dip: Float): Int {
-            return CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
+        fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
+    }
+
+    val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
+        override fun onReceiveGlobalMsg(msg: Message) {
+            if (msg.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
+                finish()
+            }
         }
     }
 
@@ -37,6 +47,7 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mIsDestroy = false
         mIsFinish = false
+        initTheme()
         val layoutId = getLayoutResId()
         if (layoutId != 0) {
             setContentView(getLayoutResId())
@@ -46,39 +57,39 @@ abstract class BaseActivity: AppCompatActivity() {
                 setContentView(view)
             }
         }
+        ViewInjector.inject(this)
+        LightBroadCast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
+    }
+
+    open fun initTheme() {
+        val themeId = KTApp.mInstance.getKTModel(ThemeModel::class.java).getCurrentTheme()
+        if (themeId == -1) {
+            return
+        }
+        setTheme(themeId)
     }
 
     @LayoutRes abstract fun getLayoutResId(): Int
 
     @Deprecated("", ReplaceWith("super.setContentView(view)", "android.support.v7.app.AppCompatActivity"))
-    override fun setContentView(view: View?) {
-        super.setContentView(view)
-    }
+    override fun setContentView(view: View?) = super.setContentView(view)
 
     @Deprecated("", ReplaceWith("super.setContentView(layoutResID)", "android.support.v7.app.AppCompatActivity"))
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-    }
+    override fun setContentView(layoutResID: Int) = super.setContentView(layoutResID)
 
     /**
      * 不想用layoutId时重写此方法返回view
      */
-    open fun buildLayoutView(): View? {
-        return null
-    }
+    open fun buildLayoutView(): View? = null
 
-    fun showToast(@StringRes msgId: Int) {
-        showToast(getString(msgId))
-    }
+    fun showToast(@StringRes msgId: Int) = showToast(getString(msgId))
 
     fun showToast(msg: String) {
         if (mIsDestroy) return
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    fun getContext(): Context {
-        return this
-    }
+    fun getContext(): Context = this
 
     override fun finish() {
         super.finish()
@@ -88,6 +99,7 @@ abstract class BaseActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mIsDestroy = true
+        LightBroadCast.getInstance().removeOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 
     /**
@@ -138,20 +150,14 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 是否在前台运行
      */
-    fun isAppOnForeground(): Boolean {
-        return !CommonUtils.isRunAtBackground(this)
-    }
+    fun isAppOnForeground(): Boolean = !CommonUtils.isRunAtBackground(this)
 
     /**
      * 启动activity
      */
-    fun startActivity(cls: Class<out Activity>) {
-        startActivity(Intent(this, cls))
-    }
+    fun startActivity(cls: Class<out Activity>) = startActivity(Intent(this, cls))
 
-    fun getActivity(): BaseActivity {
-        return this
-    }
+    fun getActivity(): BaseActivity = this
 
     /**
      * 启动设置页面
@@ -171,28 +177,20 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 以类名打印e日志
      */
-    fun logE(msg: String) {
-        Logger.e(javaClass.simpleName, msg)
-    }
+    fun logE(msg: String) = Logger.e(javaClass.simpleName, msg)
 
     /**
      * 以类名打印i日志
      */
-    fun logI(msg: String) {
-        Logger.i(javaClass.simpleName, msg)
-    }
+    fun logI(msg: String) = Logger.i(javaClass.simpleName, msg)
 
     /**
      * 以类名打印w日志
      */
-    fun logW(msg: String) {
-        Logger.w(javaClass.simpleName, msg)
-    }
+    fun logW(msg: String) = Logger.w(javaClass.simpleName, msg)
 
     /**
      * 以类名打印d日志
      */
-    fun logD(msg: String) {
-        Logger.d(javaClass.simpleName, msg)
-    }
+    fun logD(msg: String) = Logger.d(javaClass.simpleName, msg)
 }

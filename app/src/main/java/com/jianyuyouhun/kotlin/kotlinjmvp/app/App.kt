@@ -10,6 +10,10 @@ import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
  */
 class App: KTApp() {
 
+    companion object {
+        fun getInstance(): KTApp = mInstance
+    }
+
     override fun onCreate() {
         super.onCreate()
     }

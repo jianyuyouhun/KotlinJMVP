@@ -18,21 +18,14 @@ abstract class ViewFinder {
     abstract fun bindView(id: Int): View
 }
 
-class ActivityViewFinder(activity: Activity): ViewFinder() {
-
-    private var mActivity: Activity = activity
-
-    override fun bindView(id: Int): View = mActivity.findViewById(id)
+class ActivityViewFinder(val activity: Activity): ViewFinder() {
+    override fun bindView(id: Int): View = activity.findViewById(id)
 }
 
-class ViewViewFinder(view: View): ViewFinder() {
-
-    private var mView: View = view
-    override fun bindView(id: Int): View = mView.findViewById(id)
+class ViewViewFinder(val view: View): ViewFinder() {
+    override fun bindView(id: Int): View = view.findViewById(id)
 }
 
-class DialogViewFinder(dialog: Dialog): ViewFinder() {
-    private var mDialog: Dialog = dialog
-
-    override fun bindView(id: Int): View = mDialog.findViewById(id)
+class DialogViewFinder(val dialog: Dialog): ViewFinder() {
+    override fun bindView(id: Int): View = dialog.findViewById(id)
 }

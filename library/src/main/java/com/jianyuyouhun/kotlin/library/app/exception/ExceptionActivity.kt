@@ -17,7 +17,7 @@ import java.io.PrintStream
  */
 class ExceptionActivity: AppCompatActivity() {
 
-    var mExceptionView: TextView? = null
+    private lateinit var mExceptionView: TextView
 
     companion object {
         private val TAG: String = ExceptionActivity::class.java.simpleName
@@ -44,7 +44,7 @@ class ExceptionActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mExceptionView = TextView(this)
         setContentView(mExceptionView)
-        mExceptionView!!.setTextColor(Color.RED)
+        mExceptionView.setTextColor(Color.RED)
         handlerIntent(intent, false)
     }
 
@@ -56,9 +56,9 @@ class ExceptionActivity: AppCompatActivity() {
     private fun handlerIntent(intent: Intent?, isNew: Boolean) {
         val msg : String? = intent!!.getStringExtra("msg") ?: return
         if (isNew) {
-            mExceptionView!!.append("\n\n\n\n\n")
+            mExceptionView.append("\n\n\n\n\n")
         }
-        mExceptionView!!.append(msg)
+        mExceptionView.append(msg)
 
     }
 }

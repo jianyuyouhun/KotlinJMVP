@@ -14,6 +14,7 @@ abstract class BaseMVPFragment<MajorPresenter : BaseKTPresenter<*, *>, MajorMode
 
     lateinit var mPresenter: MajorPresenter
     var mModel: MajorModel? = null
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

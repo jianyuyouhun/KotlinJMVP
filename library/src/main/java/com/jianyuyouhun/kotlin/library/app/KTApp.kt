@@ -6,6 +6,8 @@ import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.mvp.common.CacheModel
+import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 
 /**
  * 应用调试模式配置
@@ -31,8 +33,9 @@ abstract class KTApp : Application() {
     }
 
     var mIsMainProcess = false
+        private set
 
-    var modelsMap : MutableMap<String, BaseKTModel> = HashMap()
+    private var modelsMap : MutableMap<String, BaseKTModel> = HashMap()
 
     override fun onCreate() {
         super.onCreate()
@@ -71,6 +74,7 @@ abstract class KTApp : Application() {
 
     private fun initKTApp() {
         val models: ArrayList<BaseKTModel> = ArrayList()
+        initCommonModels(models)
         initModels(models)
         for (model in models) {
             val time = System.currentTimeMillis()
@@ -86,14 +90,16 @@ abstract class KTApp : Application() {
         }
     }
 
+    open fun initCommonModels(models: ArrayList<BaseKTModel>) {
+        models.add(CacheModel())
+        models.add(ThemeModel())
+    }
+
     /**
      * 初始化model
      */
     abstract fun initModels(models: ArrayList<BaseKTModel>)
 
     @Suppress("UNCHECKED_CAST")
-    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model {
-        return modelsMap[model.name] as Model
-    }
-
+    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = modelsMap[model.name] as Model
 }

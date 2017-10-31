@@ -35,9 +35,7 @@ abstract class BaseFragment: Fragment() {
         return view
     }
 
-    open fun buildLayoutView(): View? {
-        return null
-    }
+    open fun buildLayoutView(): View? = null
 
     abstract fun getLayoutResId(): Int
 
@@ -48,26 +46,16 @@ abstract class BaseFragment: Fragment() {
         isDestroy = true
     }
 
-    fun getBaseActivity(): BaseActivity {
-        return activity as BaseActivity
-    }
+    fun getBaseActivity(): BaseActivity = activity as BaseActivity
 
-    fun getInsertDt(): Long {
-        return mInsertDt
-    }
+    fun getInsertDt(): Long = mInsertDt
 
-    fun showProgressDialog() {
-        getBaseActivity().showProgressDialog()
-    }
+    fun showProgressDialog() = getBaseActivity().showProgressDialog()
 
-    fun dismissProgressDialog() {
-        getBaseActivity().dismissProgressDialog()
-    }
+    fun dismissProgressDialog() = getBaseActivity().dismissProgressDialog()
 
     /**
      * 启动activity
      */
-    fun startActivity(cls: Class<out Activity>) {
-        startActivity(Intent(getBaseActivity(), cls))
-    }
+    fun startActivity(cls: Class<out Activity>) = startActivity(Intent(getBaseActivity(), cls))
 }

@@ -49,55 +49,29 @@ class LightBroadCast private constructor() {
         }
     }
 
-    fun addOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) {
-        receiveListeners.add(listener)
-    }
+    fun addOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) = receiveListeners.add(listener)
 
-    fun removeOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) {
-        receiveListeners.remove(listener)
-    }
+    fun removeOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) = receiveListeners.remove(listener)
 
-    fun sendEmptyMsg(msgWhat: Int) {
-        uiHandler.sendEmptyMessage(msgWhat)
-    }
+    fun sendEmptyMsg(msgWhat: Int) = uiHandler.sendEmptyMessage(msgWhat)
 
-    fun sendEmptyMsgDelayed(msgWhat: Int, delayMillis: Long) {
-        uiHandler.sendEmptyMessageDelayed(msgWhat, delayMillis)
-    }
+    fun sendEmptyMsgDelayed(msgWhat: Int, delayMillis: Long) = uiHandler.sendEmptyMessageDelayed(msgWhat, delayMillis)
 
-    fun sendEmptyMsgAtTime(msgWhat: Int, upTimeMillis: Long) {
-        uiHandler.sendEmptyMessageAtTime(msgWhat, upTimeMillis)
-    }
+    fun sendEmptyMsgAtTime(msgWhat: Int, upTimeMillis: Long) = uiHandler.sendEmptyMessageAtTime(msgWhat, upTimeMillis)
 
-    fun post(r: Runnable) {
-        uiHandler.post(r)
-    }
+    fun post(r: Runnable) = uiHandler.post(r)
 
-    fun postDelayed(r: Runnable, delayMillis: Long) {
-        uiHandler.postDelayed(r, delayMillis)
-    }
+    fun postDelayed(r: Runnable, delayMillis: Long) = uiHandler.postDelayed(r, delayMillis)
 
-    fun postAtTime(r: Runnable, upTimeMillis: Long) {
-        uiHandler.postAtTime(r, upTimeMillis)
-    }
+    fun postAtTime(r: Runnable, upTimeMillis: Long) = uiHandler.postAtTime(r, upTimeMillis)
 
-    fun postAtFrontOfQueue(r: Runnable) {
-        uiHandler.postAtFrontOfQueue(r)
-    }
+    fun postAtFrontOfQueue(r: Runnable) = uiHandler.postAtFrontOfQueue(r)
 
-    fun sendMessage(msg: Message) {
-        uiHandler.sendMessage(msg)
-    }
+    fun sendMessage(msg: Message) = uiHandler.sendMessage(msg)
 
-    fun sendMessageDelayed(msg: Message, delayMillis: Long) {
-        uiHandler.sendMessageDelayed(msg, delayMillis)
-    }
+    fun sendMessageDelayed(msg: Message, delayMillis: Long) = uiHandler.sendMessageDelayed(msg, delayMillis)
 
-    fun sendMessageAtTime(msg: Message, upTimeMillis: Long) {
-        uiHandler.sendMessageAtTime(msg, upTimeMillis)
-    }
+    fun sendMessageAtTime(msg: Message, upTimeMillis: Long) = uiHandler.sendMessageAtTime(msg, upTimeMillis)
 
-    fun sendMessageAtFrontOfQueue(msg: Message) {
-        uiHandler.sendMessageAtFrontOfQueue(msg)
-    }
+    fun sendMessageAtFrontOfQueue(msg: Message) = uiHandler.sendMessageAtFrontOfQueue(msg)
 }

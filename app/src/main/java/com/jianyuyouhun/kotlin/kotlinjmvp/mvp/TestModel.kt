@@ -29,7 +29,7 @@ class TestModel: BaseKTModel() {
 
     fun getDataByLambda(onResult: (result: Int, data: String) -> Unit) {
         handler.postDelayed(Runnable {
-            onResult(OnResultListener.RESULT_SUCCESS, "aaa")
+            onResult(OnResultListener.RESULT_SUCCESS, "get data success")
             handler.sendEmptyMsg(1)
         }, 2000)
     }

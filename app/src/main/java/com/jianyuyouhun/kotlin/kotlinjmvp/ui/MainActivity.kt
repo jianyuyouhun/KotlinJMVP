@@ -22,7 +22,9 @@ class MainActivity : BaseActivity() {
         testMvpBtn.setOnClickListener {
             startActivity(TestActivity::class.java)
         }
+        testSetThemeBtn.setOnClickListener {
+            startActivity(ThemeStyleActivity::class.java)
+        }
     }
-
 
 }
