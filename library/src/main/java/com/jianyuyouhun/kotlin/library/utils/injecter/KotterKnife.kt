@@ -31,6 +31,8 @@ public fun <V : View> SupportFragment.bindView(id: Int)
         : ReadOnlyProperty<SupportFragment, V> = required(id, viewFinder)
 public fun <V : View> ViewHolder.bindView(id: Int)
         : ReadOnlyProperty<ViewHolder, V> = required(id, viewFinder)
+public fun <V : View> com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.bindView(id: Int)
+        : ReadOnlyProperty<com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder, V> = required(id, viewFinder)
 
 public fun <V : View> View.bindOptionalView(id: Int)
         : ReadOnlyProperty<View, V?> = optional(id, viewFinder)
@@ -48,6 +50,8 @@ public fun <V : View> SupportFragment.bindOptionalView(id: Int)
         : ReadOnlyProperty<SupportFragment, V?> = optional(id, viewFinder)
 public fun <V : View> ViewHolder.bindOptionalView(id: Int)
         : ReadOnlyProperty<ViewHolder, V?> = optional(id, viewFinder)
+public fun <V : View> com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.bindOptionalView(id: Int)
+        : ReadOnlyProperty<com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder, V?> = optional(id, viewFinder)
 
 public fun <V : View> View.bindViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = required(ids, viewFinder)
@@ -65,6 +69,8 @@ public fun <V : View> SupportFragment.bindViews(vararg ids: Int)
         : ReadOnlyProperty<SupportFragment, List<V>> = required(ids, viewFinder)
 public fun <V : View> ViewHolder.bindViews(vararg ids: Int)
         : ReadOnlyProperty<ViewHolder, List<V>> = required(ids, viewFinder)
+public fun <V : View> com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.bindViews(vararg ids: Int)
+        : ReadOnlyProperty<com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder, List<V>> = required(ids, viewFinder)
 
 public fun <V : View> View.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = optional(ids, viewFinder)
@@ -82,6 +88,8 @@ public fun <V : View> SupportFragment.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<SupportFragment, List<V>> = optional(ids, viewFinder)
 public fun <V : View> ViewHolder.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<ViewHolder, List<V>> = optional(ids, viewFinder)
+public fun <V : View> com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.bindOptionalViews(vararg ids: Int)
+        : ReadOnlyProperty<com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder, List<V>> = optional(ids, viewFinder)
 
 private val View.viewFinder: View.(Int) -> View?
     get() = { findViewById(it) }
@@ -98,6 +106,8 @@ private val Fragment.viewFinder: Fragment.(Int) -> View?
 private val SupportFragment.viewFinder: SupportFragment.(Int) -> View?
     get() = { view!!.findViewById(it) }
 private val ViewHolder.viewFinder: ViewHolder.(Int) -> View?
+    get() = { itemView.findViewById(it) }
+private val com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.viewFinder: com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter.ViewHolder.(Int) -> View?
     get() = { itemView.findViewById(it) }
 
 private fun viewNotFound(id:Int, desc: KProperty<*>): Nothing =

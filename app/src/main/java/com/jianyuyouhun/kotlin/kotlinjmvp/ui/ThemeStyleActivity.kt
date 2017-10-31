@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.widget.ListView
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.kotlinjmvp.R
-import com.jianyuyouhun.kotlin.kotlinjmvp.adapter.SimpleBaseAdapter
 import com.jianyuyouhun.kotlin.kotlinjmvp.app.App
 import com.jianyuyouhun.kotlin.kotlinjmvp.util.AppUtils
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeInfo
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
-import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
+import com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter
+import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
 
 /**
  * 主题选择
@@ -20,8 +20,7 @@ import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
 
 class ThemeStyleActivity : BaseActivity() {
 
-    @FindViewByID(R.id.list_view)
-    lateinit var listView: ListView
+    val listView by bindView<ListView>(R.id.list_view)
 
     lateinit var themeAdapter: ThemeAdapter
 
@@ -85,8 +84,7 @@ class ThemeStyleActivity : BaseActivity() {
         }
 
         class ViewHolder: SimpleBaseAdapter.ViewHolder() {
-            @FindViewByID(R.id.theme_name)
-            lateinit var name: TextView
+            val name by bindView<TextView>(R.id.theme_name)
         }
     }
 }

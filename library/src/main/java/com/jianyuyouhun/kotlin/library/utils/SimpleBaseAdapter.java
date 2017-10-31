@@ -1,4 +1,4 @@
-package com.jianyuyouhun.kotlin.kotlinjmvp.adapter;
+package com.jianyuyouhun.kotlin.library.utils;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

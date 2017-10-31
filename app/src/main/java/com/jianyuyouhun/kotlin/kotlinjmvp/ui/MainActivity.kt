@@ -9,8 +9,9 @@ import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
 
 class MainActivity : BaseActivity() {
 
-    val textView: TextView by bindView(R.id.textView)
-    val testMvpBtn: Button by bindView(R.id.test_mvp_btn)
+    val textView by bindView<TextView>(R.id.textView)
+    val testMvpBtn by bindView<Button>(R.id.test_mvp_btn)
+    val testSetThemeBtn by bindView<Button>(R.id.test_theme_set)
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_main
