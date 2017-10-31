@@ -5,14 +5,12 @@ import android.widget.Button
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.kotlinjmvp.R
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
-import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
+import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
 
 class MainActivity : BaseActivity() {
 
-    @FindViewByID(R.id.textView)
-    lateinit var textView: TextView
-    @FindViewByID(R.id.test_mvp_btn)
-    lateinit var testMvpBtn: Button
+    val textView: TextView by bindView(R.id.textView)
+    val testMvpBtn: Button by bindView(R.id.test_mvp_btn)
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_main

@@ -46,7 +46,6 @@ abstract class BaseActivity: AppCompatActivity() {
                 setContentView(view)
             }
         }
-        ViewInjector.inject(this)
     }
 
     @LayoutRes abstract fun getLayoutResId(): Int

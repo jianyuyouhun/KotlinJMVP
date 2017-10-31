@@ -31,8 +31,6 @@ abstract class BaseFragment: Fragment() {
         } else {
             view = inflater!!.inflate(layoutId, container, false)
         }
-
-        ViewInjector.inject(this, view!!)
         onCreateView(view, container, savedInstanceState)
         return view
     }

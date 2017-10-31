@@ -8,7 +8,7 @@ import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestPresenter
 import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestView
 import com.jianyuyouhun.kotlin.library.app.BaseMVPActivity
 import com.jianyuyouhun.kotlin.library.app.KTApp
-import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
+import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
 
 /**
  *
@@ -16,8 +16,8 @@ import com.jianyuyouhun.kotlin.library.utils.injecter.FindViewByID
  */
 class TestActivity: BaseMVPActivity<TestPresenter, TestModel>(), TestView {
 
-    @FindViewByID(R.id.textView)
-    lateinit var textView: TextView
+    val textView: TextView by bindView(R.id.textView)
+
     override fun onSuccess(data: String) {
         textView.text = data
         showToast("数据获取成功")
