@@ -1,6 +1,5 @@
 package com.jianyuyouhun.kotlin.library.utils.proxy
 
-import com.jianyuyouhun.kotlin.library.app.BaseActivity
 import com.jianyuyouhun.kotlin.library.app.KTApp
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import kotlin.properties.ReadOnlyProperty
@@ -11,10 +10,11 @@ import kotlin.reflect.KProperty
  * Created by wangyu on 2017/11/1.
  */
 
-fun <Model : BaseKTModel> bindModel(cls: Class<Model>)
-    : ReadOnlyProperty<BaseActivity, Model> = require(cls.name, modelFinder)
+fun <Model : BaseKTModel> Any.bindModel(cls: Class<Model>)
+        : ReadOnlyProperty<Any, Model> = require(cls.name, modelFinder)
 
-private val modelFinder: BaseActivity.(String) -> BaseKTModel?
+
+private val Any.modelFinder: Any.(String) -> BaseKTModel?
     get() = { KTApp.mInstance.getKTModel(it) }
 
 private fun modelNotFound(name: String, desc: KProperty<*>): Nothing =

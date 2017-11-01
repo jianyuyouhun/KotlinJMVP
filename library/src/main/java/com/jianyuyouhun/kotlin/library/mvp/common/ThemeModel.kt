@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Message
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
+import com.jianyuyouhun.kotlin.library.utils.proxy.bindModel
 
 /**
  * 主题管理器
@@ -19,10 +20,9 @@ class ThemeModel: BaseKTModel() {
 
     val handler: LightBroadCast = LightBroadCast.getInstance()
     var themeList = ArrayList<ThemeInfo>()
-    lateinit var cacheModel: CacheModel
+    val cacheModel by bindModel(CacheModel::class.java)
 
     override fun onModelCreate(app: Application) {
-        cacheModel = getModel(CacheModel::class.java)
         themeList = cacheModel.getList(KEY_THEME_LIST, ThemeInfo::class.java)
                 as ArrayList<ThemeInfo>
         initDefaultTheme()

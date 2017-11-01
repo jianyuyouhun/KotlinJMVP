@@ -48,8 +48,4 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
         isDestroy = true
     }
 
-    /**
-     * 获取辅助model
-     */
-    fun <MinorModel : BaseKTModel> getModel(model: Class<MinorModel>): MinorModel = KTApp.mInstance.getKTModel(model)
 }
