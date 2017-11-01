@@ -4,10 +4,10 @@ import android.app.Application
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
-import com.jianyuyouhun.kotlin.library.utils.CommonUtils
-import com.jianyuyouhun.kotlin.library.utils.Logger
 import com.jianyuyouhun.kotlin.library.mvp.common.CacheModel
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
+import com.jianyuyouhun.kotlin.library.utils.CommonUtils
+import com.jianyuyouhun.kotlin.library.utils.Logger
 
 /**
  * 应用调试模式配置
@@ -102,4 +102,7 @@ abstract class KTApp : Application() {
 
     @Suppress("UNCHECKED_CAST")
     fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = modelsMap[model.name] as Model
+
+    @Suppress("UNCHECKED_CAST")
+    fun <Model : BaseKTModel> getKTModel(modelName : String): Model = modelsMap[modelName] as Model
 }

@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.widget.ListView
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.kotlinjmvp.R
-import com.jianyuyouhun.kotlin.kotlinjmvp.app.App
 import com.jianyuyouhun.kotlin.kotlinjmvp.util.AppUtils
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeInfo
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter
-import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
+import com.jianyuyouhun.kotlin.library.utils.proxy.bindModel
+import com.jianyuyouhun.kotlin.library.utils.proxy.bindView
 import kotterknife.bindView
 
 /**
@@ -25,7 +25,7 @@ class ThemeStyleActivity : BaseActivity() {
 
     lateinit var themeAdapter: ThemeAdapter
 
-    var themeModel: ThemeModel = App.getInstance().getKTModel(ThemeModel::class.java)
+    val themeModel by bindModel(ThemeModel::class.java)
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_theme_style
