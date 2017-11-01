@@ -32,6 +32,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
 }
 repositories {
     mavenCentral()

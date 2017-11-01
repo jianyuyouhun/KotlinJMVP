@@ -12,6 +12,7 @@ import com.jianyuyouhun.kotlin.library.mvp.common.ThemeInfo
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.SimpleBaseAdapter
 import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
+import kotterknife.bindView
 
 /**
  * 主题选择

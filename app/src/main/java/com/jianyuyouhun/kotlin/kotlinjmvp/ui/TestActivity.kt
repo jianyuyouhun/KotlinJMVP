@@ -8,7 +8,7 @@ import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestPresenter
 import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestView
 import com.jianyuyouhun.kotlin.library.app.BaseMVPActivity
 import com.jianyuyouhun.kotlin.library.app.KTApp
-import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
+import kotterknife.bindView
 
 /**
  *

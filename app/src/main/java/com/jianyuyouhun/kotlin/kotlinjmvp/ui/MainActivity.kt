@@ -5,7 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.kotlinjmvp.R
 import com.jianyuyouhun.kotlin.library.app.BaseActivity
-import com.jianyuyouhun.kotlin.library.utils.injecter.bindView
+import kotterknife.bindView
 
 class MainActivity : BaseActivity() {
 
