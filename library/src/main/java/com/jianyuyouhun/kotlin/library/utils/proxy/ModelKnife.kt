@@ -13,7 +13,6 @@ import kotlin.reflect.KProperty
 fun <Model : BaseKTModel> Any.bindModel(cls: Class<Model>)
         : ReadOnlyProperty<Any, Model> = require(cls.name, modelFinder)
 
-
 private val Any.modelFinder: Any.(String) -> BaseKTModel?
     get() = { KTApp.mInstance.getKTModel(it) }
 

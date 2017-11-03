@@ -34,7 +34,7 @@ class ThemeStyleActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         themeAdapter = ThemeAdapter(getContext())
-        themeAdapter.setOnItemClickListener { data ->
+        themeAdapter.onItemClick = {data ->
             if (data.idDefault) {
                 showToast("你已经使用了该主题")
             } else {
@@ -49,7 +49,7 @@ class ThemeStyleActivity : BaseActivity() {
     }
 
     private fun refreshData() {
-        themeAdapter.data = themeModel.themeList
+        themeAdapter.setInfoList(themeModel.themeList)
     }
 
     private fun judgeThemeSources() {
@@ -68,20 +68,9 @@ class ThemeStyleActivity : BaseActivity() {
 
         override fun getLayoutId(): Int = R.layout.list_theme_item
 
-        override fun bindView(viewHolder: ViewHolder?, data: ThemeInfo?, position: Int) {
-            val holder = viewHolder as ViewHolder
-            holder.name.text = data!!.name + if (data.idDefault) "(当前主题)" else ""
-            holder.name.setOnClickListener {
-                if (onItemClick != null) {
-                    onItemClick!!.invoke(data)
-                }
-            }
-        }
-
-        override fun onNewViewHolder(): ViewHolder = ViewHolder()
-
-        fun setOnItemClickListener(onItemClick: (themeInfo: ThemeInfo) -> Unit) {
-            this.onItemClick = onItemClick
+        override fun bindView(viewHolder: ViewHolder, info: ThemeInfo, position: Int) {
+            viewHolder.name.text = info.name + if (info.idDefault) "(当前主题)" else ""
+            viewHolder.name.setOnClickListener { onItemClick?.invoke(info) }
         }
 
         class ViewHolder: SimpleBaseAdapter.ViewHolder() {
