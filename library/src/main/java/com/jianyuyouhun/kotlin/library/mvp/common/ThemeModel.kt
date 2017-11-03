@@ -10,15 +10,16 @@ import com.jianyuyouhun.kotlin.library.utils.proxy.bindModel
  * 主题管理器
  * Created by wangyu on 2017/8/11.
  */
-class ThemeModel: BaseKTModel() {
+class ThemeModel : BaseKTModel() {
     companion object {
         val MSG_WHAT_CHANGE_APP_THEME = -101
         val MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF = -102
     }
+
     private var defaultThemeId = -1
     private val KEY_THEME_LIST = "key_theme_list"
 
-    val handler: LightBroadCast = LightBroadCast.getInstance()
+    val handler = LightBroadCast.getInstance()
     var themeList = ArrayList<ThemeInfo>()
     val cacheModel by bindModel(CacheModel::class.java)
 
@@ -77,15 +78,4 @@ class ThemeModel: BaseKTModel() {
     }
 }
 
-class ThemeInfo {
-    var name:String? = null
-    var value:Int = -1
-    var idDefault: Boolean = false
-
-    constructor(name: String, value: Int, idDefault: Boolean): this() {
-        this.name = name
-        this.value = value
-        this.idDefault = idDefault
-    }
-    constructor()
-}
+data class ThemeInfo(var name: String, var value: Int, var idDefault: Boolean)

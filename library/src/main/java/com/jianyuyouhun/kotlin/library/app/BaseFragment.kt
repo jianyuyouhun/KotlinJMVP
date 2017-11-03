@@ -15,7 +15,8 @@ import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
  */
 abstract class BaseFragment: Fragment() {
     private var isDestroy = true
-    private var mInsertDt = System.currentTimeMillis()
+    var mInsertDt = System.currentTimeMillis()
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +48,6 @@ abstract class BaseFragment: Fragment() {
     }
 
     fun getBaseActivity(): BaseActivity = activity as BaseActivity
-
-    fun getInsertDt(): Long = mInsertDt
 
     fun showProgressDialog() = getBaseActivity().showProgressDialog()
 

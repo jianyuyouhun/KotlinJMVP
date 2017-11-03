@@ -40,7 +40,7 @@ class LightBroadCast private constructor() {
 
     val receiveListeners: ArrayList<OnGlobalMsgReceiveListener> = ArrayList()
 
-    val uiHandler: Handler = object: Handler(Looper.getMainLooper()) {
+    private val uiHandler = object: Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             for (receiveListener in receiveListeners) {

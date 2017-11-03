@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
-import com.jianyuyouhun.kotlin.library.app.BuildConfig
 import com.jianyuyouhun.kotlin.library.app.KTApp
 import com.jianyuyouhun.kotlin.library.utils.Logger
 import java.io.ByteArrayOutputStream
@@ -23,13 +22,13 @@ class ExceptionActivity: AppCompatActivity() {
         private val TAG: String = ExceptionActivity::class.java.simpleName
         fun showException(throwable: Throwable) {
             val app : KTApp? = KTApp.mInstance
-            if (app != null && BuildConfig.IS_DEBUG) {
-                val byteArrayOutputStream: ByteArrayOutputStream = ByteArrayOutputStream()
+            if (app != null && KTApp.isDebug) {
+                val byteArrayOutputStream = ByteArrayOutputStream()
                 throwable.printStackTrace(PrintStream(byteArrayOutputStream))
-                val msg: String = String(byteArrayOutputStream.toByteArray())
+                val msg = String(byteArrayOutputStream.toByteArray())
 
                 try {
-                    val intent: Intent = Intent(app, ExceptionActivity::class.java)
+                    val intent = Intent(app, ExceptionActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     intent.putExtra("msg", msg)
                     app.startActivity(intent)

@@ -1,5 +1,6 @@
 package com.jianyuyouhun.kotlin.kotlinjmvp.app
 
+import com.jianyuyouhun.kotlin.kotlinjmvp.BuildConfig
 import com.jianyuyouhun.kotlin.kotlinjmvp.mvp.TestModel
 import com.jianyuyouhun.kotlin.library.app.KTApp
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
@@ -11,7 +12,7 @@ import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 class App: KTApp() {
 
     companion object {
-        fun getInstance(): KTApp = mInstance
+        fun getInstance(): App = mInstance as App
     }
 
     override fun onCreate() {
@@ -22,7 +23,5 @@ class App: KTApp() {
         models.add(TestModel())
     }
 
-    override fun setDebugMode(): Boolean {
-        return super.setDebugMode()
-    }
+    override fun setDebugMode(): Boolean = BuildConfig.DEBUG
 }

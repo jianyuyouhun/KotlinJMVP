@@ -1,6 +1,7 @@
 package com.jianyuyouhun.kotlin.library.app
 
 import android.app.Application
+import com.jianyuyouhun.kotlin.library.BuildConfig
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
@@ -8,15 +9,6 @@ import com.jianyuyouhun.kotlin.library.mvp.common.CacheModel
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
-
-/**
- * 应用调试模式配置
- *
- * Created by wangyu on 2017/7/25.
- */
-object BuildConfig {
-    var IS_DEBUG : Boolean = true
-}
 
 /**
  * application基类
@@ -40,8 +32,7 @@ abstract class KTApp : Application() {
     override fun onCreate() {
         super.onCreate()
         mInstance = this
-        BuildConfig.IS_DEBUG = setDebugMode()
-        isDebug = BuildConfig.IS_DEBUG
+        isDebug = setDebugMode()
         initExceptionCatch()
         initDependencies()
         val pidName = CommonUtils.getUIPName(this)
@@ -59,7 +50,7 @@ abstract class KTApp : Application() {
     /**
      * 设置调试模式参数
      */
-    open fun setDebugMode(): Boolean = true
+    open fun setDebugMode(): Boolean = BuildConfig.DEBUG
 
     /**
      * 初始化异常捕获逻辑
@@ -101,7 +92,7 @@ abstract class KTApp : Application() {
     abstract fun initModels(models: ArrayList<BaseKTModel>)
 
     @Suppress("UNCHECKED_CAST")
-    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = modelsMap[model.name] as Model
+    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = getKTModel(model.name)
 
     @Suppress("UNCHECKED_CAST")
     fun <Model : BaseKTModel> getKTModel(modelName : String): Model = modelsMap[modelName] as Model

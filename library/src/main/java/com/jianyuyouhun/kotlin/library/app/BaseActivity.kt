@@ -31,7 +31,7 @@ abstract class BaseActivity: AppCompatActivity() {
     private var mIsFinish = true
     private var mLastClickTime = System.currentTimeMillis()
     companion object {
-        var IS_DEBUG_MODE = BuildConfig.IS_DEBUG
+        var IS_DEBUG_MODE = KTApp.isDebug
         fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
     }
 
