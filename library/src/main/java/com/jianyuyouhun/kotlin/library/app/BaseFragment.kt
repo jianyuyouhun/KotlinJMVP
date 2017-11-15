@@ -7,7 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
+import com.jianyuyouhun.kotlin.library.utils.injecter.injectModel
+import com.jianyuyouhun.kotlin.library.utils.injecter.injectView
 
 /**
  * Fragment基类
@@ -23,15 +24,18 @@ abstract class BaseFragment: Fragment() {
         isDestroy = false
     }
 
-    @Deprecated("", ReplaceWith("super.onCreateView(inflater, container, savedInstanceState)", "android.support.v4.app.Fragment"))
+    @Deprecated("请重写onCreateView(rootView: View?, parent: ViewGroup?, savedInstanceState: Bundle?)",
+            ReplaceWith("super.onCreateView(inflater, container, savedInstanceState)",
+                    "android.support.v4.app.Fragment"))
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View?
         val layoutId = getLayoutResId()
-        if (layoutId == 0) {
-            view = buildLayoutView()
+        val view = if (layoutId == 0) {
+            buildLayoutView()
         } else {
-            view = inflater!!.inflate(layoutId, container, false)
+            inflater!!.inflate(layoutId, container, false)
         }
+        injectView(this, view)
+        injectModel(this)
         onCreateView(view, container, savedInstanceState)
         return view
     }

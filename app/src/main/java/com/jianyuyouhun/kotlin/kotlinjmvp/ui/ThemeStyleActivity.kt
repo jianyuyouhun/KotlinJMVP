@@ -69,7 +69,8 @@ class ThemeStyleActivity : BaseActivity() {
         override fun getLayoutId(): Int = R.layout.list_theme_item
 
         override fun bindView(viewHolder: ViewHolder, info: ThemeInfo, position: Int) {
-            viewHolder.name.text = info.name + if (info.idDefault) "(当前主题)" else ""
+            val showContent = info.name + if (info.idDefault) "(当前主题)" else ""
+            viewHolder.name.text = showContent
             viewHolder.name.setOnClickListener { onItemClick?.invoke(info) }
         }
 

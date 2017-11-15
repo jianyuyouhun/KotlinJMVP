@@ -21,7 +21,7 @@ abstract class SimpleBaseAdapter<Info, in VH : SimpleBaseAdapter.ViewHolder>(val
      *
      * @param infoList 数据列表
      */
-    fun addInfoList(infoList: List<Info>) {
+    open fun addInfoList(infoList: List<Info>) {
         this.infoList.addAll(infoList)
         notifyDataSetChanged()
     }
@@ -31,7 +31,7 @@ abstract class SimpleBaseAdapter<Info, in VH : SimpleBaseAdapter.ViewHolder>(val
      *
      * @param position
      */
-    fun deleteInfo(position: Int) {
+    open fun deleteInfo(position: Int) {
         this.infoList.removeAt(position)
         notifyDataSetChanged()
     }
@@ -42,31 +42,29 @@ abstract class SimpleBaseAdapter<Info, in VH : SimpleBaseAdapter.ViewHolder>(val
      *
      * @return 适配器数据源
      */
-    fun getInfoList(): List<Info> {
-        return ArrayList(infoList)
-    }
+    open fun getInfoList(): List<Info> = ArrayList(infoList)
 
     /**
      * 设置要显示的数据，注意：调用本方法设置数据，listView不需要再调用：notifyDataSetChanged
      *
      * @param infoList 数据
      */
-    fun setInfoList(infoList: List<Info>) {
+    open fun setInfoList(infoList: List<Info>) {
         this.infoList.clear()
         addInfoList(infoList)
     }
 
-    fun addToLast(data: Info) {
+    open fun addToLast(data: Info) {
         infoList.add(data)
         notifyDataSetChanged()
     }
 
-    fun addToFirst(data: Info) {
+    open fun addToFirst(data: Info) {
         infoList.add(0, data)
         notifyDataSetChanged()
     }
 
-    fun addToPos(data: Info, pos: Int) {
+    open fun addToPos(data: Info, pos: Int) {
         infoList.add(pos, data)
         notifyDataSetChanged()
     }

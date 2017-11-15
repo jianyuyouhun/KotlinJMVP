@@ -92,8 +92,8 @@ abstract class KTApp : Application() {
     abstract fun initModels(models: ArrayList<BaseKTModel>)
 
     @Suppress("UNCHECKED_CAST")
-    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model = getKTModel(model.name)
+    fun <Model : BaseKTModel> getKTModel(model: Class<Model>): Model? = getKTModel(model.name)
 
     @Suppress("UNCHECKED_CAST")
-    fun <Model : BaseKTModel> getKTModel(modelName : String): Model = modelsMap[modelName] as Model
+    fun <Model : BaseKTModel> getKTModel(modelName : String): Model? = modelsMap[modelName] as Model
 }

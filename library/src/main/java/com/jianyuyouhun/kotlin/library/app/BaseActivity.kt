@@ -19,7 +19,8 @@ import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
 import com.jianyuyouhun.kotlin.library.utils.Logger
-import com.jianyuyouhun.kotlin.library.utils.injecter.ViewInjector
+import com.jianyuyouhun.kotlin.library.utils.injecter.injectModel
+import com.jianyuyouhun.kotlin.library.utils.injecter.injectView
 
 /**
  * Activity基类
@@ -35,7 +36,7 @@ abstract class BaseActivity: AppCompatActivity() {
         fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
     }
 
-    val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
+    private val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
         override fun onReceiveGlobalMsg(msg: Message) {
             if (msg.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
                 finish()
@@ -57,28 +58,29 @@ abstract class BaseActivity: AppCompatActivity() {
                 setContentView(view)
             }
         }
-        ViewInjector.inject(this)
+        injectView(this)
+        injectModel(this)
         LightBroadCast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 
     open fun initTheme() {
-        val themeId = KTApp.mInstance.getKTModel(ThemeModel::class.java).getCurrentTheme()
+        val themeId = KTApp.mInstance.getKTModel(ThemeModel::class.java)?.getCurrentTheme()
         if (themeId == -1) {
             return
         }
-        setTheme(themeId)
+        setTheme(themeId!!)
     }
 
     @LayoutRes abstract fun getLayoutResId(): Int
 
-    @Deprecated("", ReplaceWith("super.setContentView(view)", "android.support.v7.app.AppCompatActivity"))
+    @Deprecated("已使用buildLayoutView替代", ReplaceWith("super.setContentView(view)", "android.support.v7.app.AppCompatActivity"))
     override fun setContentView(view: View?) = super.setContentView(view)
 
-    @Deprecated("", ReplaceWith("super.setContentView(layoutResID)", "android.support.v7.app.AppCompatActivity"))
+    @Deprecated("已使用getLayoutResId替代", ReplaceWith("super.setContentView(layoutResID)", "android.support.v7.app.AppCompatActivity"))
     override fun setContentView(layoutResID: Int) = super.setContentView(layoutResID)
 
     /**
-     * 不想用layoutId时重写此方法返回view
+     * 不想用layoutId时重写此方法返回view,layoutId返回0
      */
     open fun buildLayoutView(): View? = null
 
