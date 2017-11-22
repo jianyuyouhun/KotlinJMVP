@@ -17,8 +17,8 @@ class TestModel: BaseKTModel() {
     lateinit var handler: LightBroadCast
 
     val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
-        override fun onReceiveGlobalMsg(msg: Message) {
-            Logger.d("globalMsg", ""+msg.what)
+        override fun onReceiveGlobalMsg(msg: Message?) {
+            Logger.d("globalMsg", ""+msg?.what)
         }
     }
 

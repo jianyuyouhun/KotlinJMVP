@@ -37,8 +37,8 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     private val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
-        override fun onReceiveGlobalMsg(msg: Message) {
-            if (msg.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
+        override fun onReceiveGlobalMsg(msg: Message?) {
+            if (msg?.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
                 finish()
             }
         }

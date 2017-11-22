@@ -14,18 +14,17 @@ abstract class BaseKTPresenter<MajorManager : BaseKTModel, MajorView : BaseKTVie
     var mModel: MajorManager? = null
         private set
     private var mView: MajorView? = null
-        private set
     private var mViewRef: WeakReference<MajorView>? = null
-        private set
     lateinit var context: Context
         private set
     var isDestroy = false
         private set
 
-    protected val TAG: String = BaseKTPresenter::class.java.simpleName
+    lateinit var TAG: String
 
     open fun onCreate(context: Context) {
         this.context = context
+        TAG = this::class.java.simpleName
         isDestroy = false
         Logger.d(TAG, "onCreate")
     }

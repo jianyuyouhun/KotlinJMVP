@@ -8,7 +8,7 @@ import android.os.Message
  * 全局消息回调监听
  */
 interface OnGlobalMsgReceiveListener {
-    fun onReceiveGlobalMsg(msg: Message)
+    fun onReceiveGlobalMsg(msg: Message?)
 }
 
 /**
@@ -39,19 +39,27 @@ class LightBroadCast private constructor() {
     }
 
     val receiveListeners: ArrayList<OnGlobalMsgReceiveListener> = ArrayList()
+    val receiveLambdaListeners: ArrayList<(msg: Message?)->Unit> = ArrayList()
 
     private val uiHandler = object: Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             for (receiveListener in receiveListeners) {
-                receiveListener.onReceiveGlobalMsg(msg!!)
+                receiveListener.onReceiveGlobalMsg(msg)
+            }
+            for (lambdaListener in receiveLambdaListeners) {
+                lambdaListener.invoke(msg)
             }
         }
     }
 
     fun addOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) = receiveListeners.add(listener)
 
+    fun addOnGlobalMsgReceiveListener(listener: ((msg: Message?) -> Unit)) = receiveLambdaListeners.add(listener)
+
     fun removeOnGlobalMsgReceiveListener(listener: OnGlobalMsgReceiveListener) = receiveListeners.remove(listener)
+
+    fun removeOnGlobalMsgReceiveListener(listener: ((msg: Message?) ->Unit)) = receiveLambdaListeners.remove(listener)
 
     fun sendEmptyMsg(msgWhat: Int) = uiHandler.sendEmptyMessage(msgWhat)
 
