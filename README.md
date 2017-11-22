@@ -59,9 +59,7 @@
 
 　　所以，我们可以得出一些结论，kotlin中javaClass是作为一个具体实例化对象（这个对象是Kotlin中的Any的子类实例化，在Java中则是java.lang.Object的子类实例化，Any和Object在两种语言编译环境下转成字节码后应该是一样的）的**一个属性存在**，而class.java就像Java中调用getClass是一样的。是一个固定类型，不管我一个对象是在Activity中实例化，还是在ViewHolder中实例化，class.java是一样的，但是javaClass则明显不同。
 
-　　更形点的说法，javaClass就像一个一个学生的各种标签，他在A学校中的学号和转学到B学校去的学号是不同的，而class.java则是他的身份证号码，无论走到哪里，哪怕他经历从学校到社会职场（可以理解为从kotlin到java）的转变，这个身份证号码依然是不变的。
-
-　　所以我们需要注意的是，在Kotlin语法中使用Java的特性的时候，这点需要特别注意。
+　　所以，在Kotlin语法中使用Java的反射机制这样的特性的时候，需要注意二者的区别，至少不会在出现bug的时候手足无措。
 
 > **superClass和::class.java.superclass也是一样的原理**
 
