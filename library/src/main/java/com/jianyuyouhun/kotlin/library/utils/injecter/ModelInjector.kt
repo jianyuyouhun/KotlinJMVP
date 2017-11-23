@@ -17,11 +17,11 @@ fun injectModel(any: Any) {
             val modifiers = field.modifiers
             if (Modifier.isFinal(modifiers) || Modifier.isStatic(modifiers)) continue
 
-            if (field.isAnnotationPresent(Model::class.java)) continue
+            if (!field.isAnnotationPresent(Model::class.java)) continue
 
             val type = field.type
             if (!BaseKTModel::class.java.isAssignableFrom(type)) {
-                throw ModelInjectException("@Model 只能在BaseJModel子类中使用")
+                throw ModelInjectException("@Model 只能在BaseKTModel子类中使用")
             }
 
             @Suppress("UNCHECKED_CAST")

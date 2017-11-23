@@ -21,15 +21,13 @@ import kotterknife.bindView
 
 class ThemeStyleActivity : BaseActivity() {
 
-    val listView by bindView<ListView>(R.id.list_view)
+    private val listView by bindView<ListView>(R.id.list_view)
 
-    lateinit var themeAdapter: ThemeAdapter
+    private lateinit var themeAdapter: ThemeAdapter
 
-    val themeModel by bindModel(ThemeModel::class.java)
+    private val themeModel by bindModel(ThemeModel::class.java)
 
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_theme_style
-    }
+    override fun getLayoutResId(): Int = R.layout.activity_theme_style
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

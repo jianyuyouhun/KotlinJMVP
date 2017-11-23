@@ -78,4 +78,4 @@ class ThemeModel : BaseKTModel() {
     }
 }
 
-data class ThemeInfo(var name: String, var value: Int, var idDefault: Boolean)
+data class ThemeInfo(var name: String = "", var value: Int = 0, var idDefault: Boolean = false)
