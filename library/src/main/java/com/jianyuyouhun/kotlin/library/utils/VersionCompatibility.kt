@@ -15,20 +15,20 @@ inline fun onTargetOrAbove(target: Int, up: () -> Unit, down: () -> Unit) {
     }
 }
 
-internal inline fun on14orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on14orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.ICE_CREAM_SANDWICH, up, down)
 
-internal inline fun on17orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on17orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.JELLY_BEAN_MR1, up, down)
 
-internal inline fun on19orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on19orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.KITKAT, up, down)
 
-internal inline fun on21orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on21orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.LOLLIPOP, up, down)
 
-internal inline fun on23orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on23orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.M, up, down)
 
-internal inline fun on24orAbove(up: () -> Unit, down: () -> Unit)
+inline fun on24orAbove(up: () -> Unit, down: () -> Unit)
     = onTargetOrAbove(Build.VERSION_CODES.N, up, down)
