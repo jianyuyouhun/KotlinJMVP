@@ -19,13 +19,16 @@ class ThemeModel : BaseKTModel() {
     private var defaultThemeId = -1
     private val KEY_THEME_LIST = "key_theme_list"
 
-    val handler = LightBroadCast.getInstance()
-    var themeList = ArrayList<ThemeInfo>()
-    val cacheModel by bindModel(CacheModel::class.java)
+    private val handler by lazy { LightBroadCast.instance }
+
+    private val cacheModel by bindModel(CacheModel::class.java)
+
+    val themeList by lazy {
+        cacheModel.getList(KEY_THEME_LIST, ThemeInfo::class.java)
+                as ArrayList<ThemeInfo>
+    }
 
     override fun onModelCreate(app: Application) {
-        themeList = cacheModel.getList(KEY_THEME_LIST, ThemeInfo::class.java)
-                as ArrayList<ThemeInfo>
         initDefaultTheme()
     }
 
@@ -38,9 +41,7 @@ class ThemeModel : BaseKTModel() {
         }
     }
 
-    fun getCurrentTheme(): Int {
-        return defaultThemeId
-    }
+    fun getCurrentTheme(): Int = defaultThemeId
 
     fun addTheme(theme: ThemeInfo) {
         themeList.add(theme)

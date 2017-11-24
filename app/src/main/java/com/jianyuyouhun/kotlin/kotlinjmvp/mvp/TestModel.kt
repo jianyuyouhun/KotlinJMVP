@@ -3,10 +3,9 @@ package com.jianyuyouhun.kotlin.kotlinjmvp.mvp
 import android.app.Application
 import android.os.Message
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
-import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import com.jianyuyouhun.kotlin.library.mvp.OnResultListener
-import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.utils.lgD
 
 /**
  *
@@ -14,16 +13,13 @@ import com.jianyuyouhun.kotlin.library.utils.Logger
  */
 class TestModel: BaseKTModel() {
 
-    lateinit var handler: LightBroadCast
+    private val handler by lazy { LightBroadCast.instance }
 
-    val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
-        override fun onReceiveGlobalMsg(msg: Message?) {
-            Logger.d("globalMsg", ""+msg?.what)
-        }
+    private val onGlobalMsgReceiveListener = {msg: Message? ->
+        lgD("globalMsg", ""+msg?.what)
     }
 
     override fun onModelCreate(app: Application) {
-        handler = LightBroadCast.getInstance()
         handler.addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 

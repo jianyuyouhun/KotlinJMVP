@@ -12,7 +12,7 @@ import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 class App: KTApp() {
 
     companion object {
-        fun getInstance(): App = mInstance as App
+        val instance: App by lazy { mInstance as App }
     }
 
     override fun onCreate() {

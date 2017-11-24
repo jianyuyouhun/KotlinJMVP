@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.jianyuyouhun.kotlin.library.app.KTApp
-import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.utils.lgE
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
@@ -33,7 +33,7 @@ class ExceptionActivity: AppCompatActivity() {
                     intent.putExtra("msg", msg)
                     app.startActivity(intent)
                 } catch (e : Exception) {
-                    Logger.e(TAG, "异常捕获未在manifest中声明")
+                    lgE(TAG, "异常捕获未在manifest中声明")
                 }
             }
         }

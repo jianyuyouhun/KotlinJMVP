@@ -8,7 +8,6 @@ import android.widget.BaseAdapter
 import java.lang.Exception
 import java.lang.reflect.ParameterizedType
 
-
 /**
  * 模仿recyclerView的adapter做的封装
  * Created by wangyu on 2017-11-03

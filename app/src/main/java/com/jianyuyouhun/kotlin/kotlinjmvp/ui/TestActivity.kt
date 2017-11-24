@@ -29,7 +29,7 @@ class TestActivity: BaseMVPActivity<TestPresenter, TestModel>(), TestView {
 
     override fun getLayoutResId(): Int = R.layout.activity_test_mvp
 
-    override fun initModel(): TestModel? = App.getInstance().getKTModel(TestModel::class.java)
+    override fun initModel(): TestModel? = App.instance.getKTModel(TestModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

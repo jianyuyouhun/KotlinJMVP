@@ -18,28 +18,11 @@ interface OnGlobalMsgReceiveListener {
 class LightBroadCast private constructor() {
 
     companion object {
-        private var hasInit = false
-        private lateinit var lightBroadCast: LightBroadCast
-
-        fun getInstance(): LightBroadCast {
-            if (hasInit) {
-                return lightBroadCast
-            } else {
-                throw RuntimeException("请在app中初始化 LightBroadCast")
-            }
-        }
-
-        @Synchronized fun init() {
-            if (hasInit) {
-                return
-            }
-            lightBroadCast = LightBroadCast()
-            hasInit = true
-        }
+        val instance: LightBroadCast by lazy { LightBroadCast() }
     }
 
     val receiveListeners: ArrayList<OnGlobalMsgReceiveListener> = ArrayList()
-    val receiveLambdaListeners: ArrayList<(msg: Message?)->Unit> = ArrayList()
+    val receiveLambdaListeners: ArrayList<(msg: Message?) -> Unit> = ArrayList()
 
     private val uiHandler = object: Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message?) {

@@ -2,13 +2,12 @@ package com.jianyuyouhun.kotlin.library.app
 
 import android.app.Application
 import com.jianyuyouhun.kotlin.library.BuildConfig
-import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
 import com.jianyuyouhun.kotlin.library.app.exception.ExceptionCaughtAdapter
 import com.jianyuyouhun.kotlin.library.mvp.BaseKTModel
 import com.jianyuyouhun.kotlin.library.mvp.common.CacheModel
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
 import com.jianyuyouhun.kotlin.library.utils.CommonUtils
-import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.utils.lgE
 
 /**
  * application基类
@@ -44,7 +43,7 @@ abstract class KTApp : Application() {
      * 初始化第三方依赖
      */
     open fun initDependencies() {
-        LightBroadCast.init()
+
     }
 
     /**
@@ -74,7 +73,7 @@ abstract class KTApp : Application() {
             val modelName = modelClass.name
             modelsMap.put(modelName, model)
             val spendTime = System.currentTimeMillis() - time
-            Logger.e(TAG, modelClass.simpleName + "启动耗时(毫秒)：" + spendTime)
+            lgE(TAG, modelClass.simpleName + "启动耗时(毫秒)：" + spendTime)
         }
         for (model in models) {
             model.onAllModelCreate()

@@ -15,10 +15,8 @@ import android.view.View
 import android.widget.Toast
 import com.jianyuyouhun.kotlin.library.R
 import com.jianyuyouhun.kotlin.library.app.broadcast.LightBroadCast
-import com.jianyuyouhun.kotlin.library.app.broadcast.OnGlobalMsgReceiveListener
 import com.jianyuyouhun.kotlin.library.mvp.common.ThemeModel
-import com.jianyuyouhun.kotlin.library.utils.CommonUtils
-import com.jianyuyouhun.kotlin.library.utils.Logger
+import com.jianyuyouhun.kotlin.library.utils.*
 import com.jianyuyouhun.kotlin.library.utils.injecter.injectModel
 import com.jianyuyouhun.kotlin.library.utils.injecter.injectView
 
@@ -36,11 +34,9 @@ abstract class BaseActivity: AppCompatActivity() {
         fun dipToPx(dip: Float): Int = CommonUtils.dipToPx(KTApp.mInstance as Context, dip)
     }
 
-    private val onGlobalMsgReceiveListener: OnGlobalMsgReceiveListener = object : OnGlobalMsgReceiveListener {
-        override fun onReceiveGlobalMsg(msg: Message?) {
-            if (msg?.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
-                finish()
-            }
+    private val onGlobalMsgReceiveListener = {msg: Message? ->
+        if (msg?.what == ThemeModel.MSG_WHAT_ALL_ACTIVITY_CLOSE_SELF) {
+            finish()
         }
     }
 
@@ -60,7 +56,7 @@ abstract class BaseActivity: AppCompatActivity() {
         }
         injectView(this)
         injectModel(this)
-        LightBroadCast.getInstance().addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
+        LightBroadCast.instance.addOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 
     open fun initTheme() {
@@ -101,7 +97,7 @@ abstract class BaseActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mIsDestroy = true
-        LightBroadCast.getInstance().removeOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
+        LightBroadCast.instance.removeOnGlobalMsgReceiveListener(onGlobalMsgReceiveListener)
     }
 
     /**
@@ -179,20 +175,20 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * 以类名打印e日志
      */
-    fun logE(msg: String) = Logger.e(javaClass.simpleName, msg)
+    fun logE(msg: String) = lgE(javaClass.simpleName, msg)
 
     /**
      * 以类名打印i日志
      */
-    fun logI(msg: String) = Logger.i(javaClass.simpleName, msg)
+    fun logI(msg: String) = lgI(javaClass.simpleName, msg)
 
     /**
      * 以类名打印w日志
      */
-    fun logW(msg: String) = Logger.w(javaClass.simpleName, msg)
+    fun logW(msg: String) = lgW(javaClass.simpleName, msg)
 
     /**
      * 以类名打印d日志
      */
-    fun logD(msg: String) = Logger.d(javaClass.simpleName, msg)
+    fun logD(msg: String) = lgD(javaClass.simpleName, msg)
 }
